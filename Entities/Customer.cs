@@ -1,6 +1,8 @@
-﻿namespace CustomerSegmentation.Entities
+﻿using System;
+
+namespace CustomerSegmentation.Entities
 {
-    class Customer
+    class Customer : IComparable<Customer>
     {
         public int ID { get; private set; }
         public string Name { get; set; }
@@ -46,8 +48,7 @@
 
         public override string ToString()
         {
-            return "REPORT"
-                + "\nID: "
+            return "ID: "
                 + ID
                 + ", Customer: "
                 + Name
@@ -55,6 +56,11 @@
                 + Email
                 + ", Tier: "
                 + Tier(MonthlyGoal, MonthlyAmountSpent, GrowthPotential);
+        }
+
+        public int CompareTo(Customer other)
+        {
+            return MonthlyAmountSpent.CompareTo(other.MonthlyAmountSpent);
         }
     }
 }

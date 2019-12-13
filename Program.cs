@@ -38,6 +38,10 @@ namespace CustomerSegmentation
                 list.Add(new Customer(Id, Name, Email, MonthlyAmountSpent, GrowthPotential, MonthlyGoal));
             }
 
+            list.Sort();
+
+            Console.WriteLine("REPORT:");
+
             foreach (Customer cr in list)
             {
                 Console.WriteLine(cr);
