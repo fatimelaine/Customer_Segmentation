@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace CustomerSegmentation.Entities
+﻿namespace CustomerSegmentation.Entities
 {
-    class Customer : IComparable<Customer>
+    class Customer
     {
         public int ID { get; private set; }
         public string Name { get; set; }
@@ -56,11 +54,6 @@ namespace CustomerSegmentation.Entities
                 + Email
                 + ", Tier: "
                 + Tier(MonthlyGoal, MonthlyAmountSpent, GrowthPotential);
-        }
-
-        public int CompareTo(Customer other)
-        {
-            return MonthlyAmountSpent.CompareTo(other.MonthlyAmountSpent);
         }
     }
 }
