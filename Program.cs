@@ -38,7 +38,9 @@ namespace CustomerSegmentation
                 list.Add(new Customer(Id, Name, Email, MonthlyAmountSpent, GrowthPotential, MonthlyGoal));
             }
 
-            list.Sort(CompareCustomers);
+            Comparison<Customer> comp = (c1, c2) => c1.MonthlyAmountSpent.CompareTo(c2.MonthlyAmountSpent);
+
+            list.Sort(comp);
 
             Console.WriteLine("REPORT:");
 
@@ -46,11 +48,6 @@ namespace CustomerSegmentation
             {
                 Console.WriteLine(cr);
             }
-        }
-
-        static int CompareCustomers(Customer c1, Customer c2)
-        {
-            return c1.MonthlyAmountSpent.CompareTo(c2.MonthlyAmountSpent);
         }
     }
 }
