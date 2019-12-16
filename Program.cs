@@ -40,12 +40,19 @@ namespace CustomerSegmentation
 
             list.Sort((c1, c2) => c1.MonthlyAmountSpent.CompareTo(c2.MonthlyAmountSpent));
 
+            list.RemoveAll(LowGrowthPotential);
+
             Console.WriteLine("REPORT:");
 
             foreach (Customer cr in list)
             {
                 Console.WriteLine(cr);
             }
+        }
+
+        public static bool LowGrowthPotential(Customer c)
+        {
+            return c.GrowthPotential == false;  
         }
     }
 }
