@@ -48,7 +48,7 @@
         {
             return "ID: "
                 + ID
-                + ", Customer: "
+                + ", Name: "
                 + Name
                 + ", Email: "
                 + Email

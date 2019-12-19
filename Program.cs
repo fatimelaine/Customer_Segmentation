@@ -2,11 +2,22 @@
 using System.Globalization;
 using CustomerSegmentation.Entities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CustomerSegmentation
 {
     class Program
     {
+        static void Print<T>(string message, IEnumerable<T> collection)
+        {
+            Console.WriteLine(message);
+            foreach (T obj in collection)
+            {
+                Console.WriteLine(obj);
+            }
+            Console.WriteLine();
+        }
+
         static void Main(string[] args)
         {
 
@@ -38,21 +49,17 @@ namespace CustomerSegmentation
                 list.Add(new Customer(Id, Name, Email, MonthlyAmountSpent, GrowthPotential, MonthlyGoal));
             }
 
-            list.Sort((c1, c2) => c1.MonthlyAmountSpent.CompareTo(c2.MonthlyAmountSpent));
+            var r1 = list.Where(c => c.GrowthPotential == true && c.MonthlyAmountSpent >= MonthlyGoal).OrderBy(c => c.MonthlyAmountSpent).ThenBy(c => c.Name); 
+            Print("Diamond Customers:", r1);
 
-            list.RemoveAll(LowGrowthPotential);
+            var r2 = list.Where(c => c.GrowthPotential == false && c.MonthlyAmountSpent >= MonthlyGoal).OrderBy(c => c.MonthlyAmountSpent).ThenBy(c => c.Name);
+            Print("Gold Customers:", r2);
 
-            Console.WriteLine("REPORT:");
+            var r3 = list.Where(c => c.GrowthPotential == true && c.MonthlyAmountSpent < MonthlyGoal).OrderBy(c => c.MonthlyAmountSpent).ThenBy(c => c.Name);
+            Print("Silver Customers:", r3);
 
-            foreach (Customer cr in list)
-            {
-                Console.WriteLine(cr);
-            }
-        }
-
-        public static bool LowGrowthPotential(Customer c)
-        {
-            return c.GrowthPotential == false;  
+            var r4 = list.Where(c => c.GrowthPotential == false && c.MonthlyAmountSpent < MonthlyGoal).OrderBy(c => c.MonthlyAmountSpent).ThenBy(c => c.Name);
+            Print("Bronze Customers:", r4);
         }
     }
 }
